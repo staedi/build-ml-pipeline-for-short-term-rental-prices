@@ -6,10 +6,11 @@ dependencies:
   - python=3.8
   # - jupyterlab=3.0.12
   - jupyter=1.0.0
+  - ipywidgets=7.6.3
   - seaborn=0.11.1
   - pandas=1.4.4
   - pip=20.3.3
-  - pandas-profiling=2.11.0
+  - pandas-profiling=3.1.0
   - pyarrow=8.0.0
   - pip:
       - wandb==0.13.3
