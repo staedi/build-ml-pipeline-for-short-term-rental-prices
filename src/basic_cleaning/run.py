@@ -26,7 +26,10 @@ def go(args):
     ######################
 
     artifact_local_path = run.use_artifact(args.input_artifact).file()
+    logger.info('Data download completed')
+
     df = pd.read_csv(artifact_local_path)
+    logger.info('Data loading completed')
 
     # Drop outliers
     min_price, max_price = args.min_price, args.max_price
@@ -35,7 +38,12 @@ def go(args):
     # Convert last_review to datetime
     df['last_review'] = pd.to_datetime(df['last_review'])
 
+    logger.info(f'Minimum price:{df.price.min()}, Maximum price:{df.price.max()}')
+    logger.info('DataFrame type infos')
+    logger.info(df.info())
+
     df.to_csv("clean_sample.csv", index=False)
+    logger.info('Data save completed')
 
     artifact = wandb.Artifact(
         args.output_artifact,
@@ -46,6 +54,7 @@ def go(args):
     artifact.add_file("clean_sample.csv")
     run.log_artifact(artifact)
 
+    logger.info('Data upload completed')
 
 if __name__ == "__main__":
 
