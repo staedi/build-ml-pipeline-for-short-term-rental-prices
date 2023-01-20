@@ -33,8 +33,9 @@ def go(args):
 
     # Drop outliers
     min_price, max_price = args.min_price, args.max_price
-    idx = df['price'].between(min_price, max_price)
-    df = df[idx].copy()
+    # idx = df['price'].between(min_price, max_price)
+    # df = df[idx].copy()
+    df = df.loc[(df['price'].between(min_price, max_price)) & (df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2))]
     # Convert last_review to datetime
     df['last_review'] = pd.to_datetime(df['last_review'])
 
